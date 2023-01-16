@@ -17,10 +17,10 @@ sudo apt-get install -y nodejs
 
 ## How to run?
 
-**1. Change directory to `berlinforx`**
+**1. Change directory to `silverforx`**
 
 ```shell
-cd ./berlinforx
+cd ./silverforx
 ```
 
 
@@ -35,6 +35,10 @@ npm install
 cp .env-sample .env
 ```
 
+```
+nano .env
+```
+then setting with your config
 
 **4. Run the script**
 

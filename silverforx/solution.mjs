@@ -1,10 +1,10 @@
 import { Api, JsonRpc, RpcError, JsSignatureProvider } from 'ineryjs/dist/index.js'
-const url = "http://128.199.194.7:8888"
+const url = "http://134.209.189.99:8888"
 
 const json_rpc = new JsonRpc(url)
 const private_key = process.env.PRIVATE_KEY;
 
-const account = "berlinforx"
+const account = "silverforx"
 const actor = process.env.INERY_ACCOUNT
 const signature  = new JsSignatureProvider([private_key]);
 
@@ -13,7 +13,7 @@ const api = new Api({
     signatureProvider: signature
 })
 
-async function create(nomortamu, tamu, datatamu){
+async function create(tanda, klaien, kleintdata){
     try{
         const tx = await api.transact({
             actions:[
@@ -27,14 +27,15 @@ async function create(nomortamu, tamu, datatamu){
                         }
                     ],
                     data:{
-                        nomortamu, tamu, datatamu
+                        tanda, klaien, kleintdata
                     }
                 }
             ]
         },{broadcast:true,sign:true})
 
-        
+        console.log("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
         console.log("===================== CREATE trx details ======================")
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         console.log(tx, "\n")
         console.log("Response from contract :", tx.processed.action_traces[0].console)
         console.log("\n")
@@ -44,7 +45,7 @@ async function create(nomortamu, tamu, datatamu){
 }
 
 
-async function read(nomortamu){
+async function read(tanda){
     try{
         const tx = await api.transact({
             actions:[
@@ -58,13 +59,14 @@ async function read(nomortamu){
                         }
                     ],
                     data:{
-                        nomortamu
+                        tanda
                     }
                 }
             ]
         },{broadcast:true,sign:true})
-        
+        console.log("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
         console.log("===================== READ trx details ========================")
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         console.log(tx, "\n")
         console.log("Response from contract :", tx.processed.action_traces[0].console)
         console.log("\n")
@@ -73,7 +75,7 @@ async function read(nomortamu){
     }
 }
 
-async function update(nomortamu, datatamu){
+async function update(tanda, kleintdata){
     try{
         const tx = await api.transact({
             actions:[
@@ -87,14 +89,15 @@ async function update(nomortamu, datatamu){
                         }
                     ],
                     data:{
-                        nomortamu, datatamu
+                        tanda, kleintdata
                     }
                 }
             ]
         },{broadcast:true,sign:true})
 
-        
-        console.log("===================== UPDATE transaction details ======================")
+        console.log("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+        console.log("================== UPDATE transaction details =================")
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         console.log(tx, "\n")
         console.log("Response from contract :", tx.processed.action_traces[0].console)
         console.log("\n")
@@ -103,7 +106,7 @@ async function update(nomortamu, datatamu){
     }
 }
 
-async function destroy(nomortamu){
+async function destroy(tanda){
     try{
         const tx = await api.transact({
             actions:[
@@ -117,14 +120,15 @@ async function destroy(nomortamu){
                         }
                     ],
                     data:{
-                        nomortamu
+                        tanda
                     }
                 }
             ]
         },{broadcast:true,sign:true})
 
-        
-        console.log("===================== DESTROY transaction details =====================")
+        console.log("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+        console.log("================= DESTROY transaction details =================")
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         console.log(tx, "\n")
         console.log("Response from contract :", tx.processed.action_traces[0].console)
         console.log("\n")
@@ -134,11 +138,11 @@ async function destroy(nomortamu){
 }
 
 
-async function main(nomortamu, tamu, datatamu){
-    await create(nomortamu, tamu, datatamu)
-    await read(nomortamu)
-    await update(nomortamu, datatamu)
-    await destroy(nomortamu)
+async function main(tanda, klaien, kleintdata){
+    await create(tanda, klaien, kleintdata)
+    await read(tanda)
+    await update(tanda, kleintdata)
+    await destroy(tanda)
 }
 
-main(1, account, "CRUD Transaction via JSON RPC")
+main(1, account, "CRUD Smartcontract transaction via JSON RPC")
